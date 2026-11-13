@@ -155,19 +155,6 @@ def test_list_methods():
         'pear',
     ]
 
-    # Sort items of the list in place, but this time using the length of the item as the key.
-    fruits_copy.sort(key=len)
-    assert fruits_copy == [
-        'kiwi',
-        'pear',
-        'apple',
-        'apple',
-        'grape',
-        'banana',
-        'banana',
-        'orange',
-    ]
-
     # list.pop([i])
     # Remove the item at the given position in the list, and return it. If no index is specified,
     # a.pop() removes and returns the last item in the list. (The square brackets around the i in
@@ -363,6 +350,12 @@ def test_list_sorting():
     fruits.sort()
     assert fruits == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
 
+    # Sort items of the list in place, but this time using the length of the item as the key.
+    fruits.sort(key=len)
+    assert fruits == ['kiwi','pear','apple','apple','banana','banana','orange']
+
     # The sorted() built-in function returns a new sorted list from the items in iterable.
     fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
     assert sorted(fruits) == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
+
+    
