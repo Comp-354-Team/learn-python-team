@@ -131,6 +131,17 @@ def test_function_definition():
 
         # exponent uses the default value 2
         assert power(3) == 9 
-        
+
         # exponent passed positionally
         assert power(2, 3) == 8
+
+
+    # Function can have no return statement. They return None.
+
+    def test_function_without_return():
+        def say_hello(name):
+
+            # no return statement
+            message = "Hello, " + name
+
+        assert say_hello("Teo") is None 
