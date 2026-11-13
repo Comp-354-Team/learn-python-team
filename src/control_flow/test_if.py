@@ -26,3 +26,19 @@ def test_if_statement():
         conclusion = 'Number bigger than or equal to one'
 
     assert conclusion == 'Number bigger than or equal to one'
+
+def test_nested_if_statement():
+    """Test nested conditional statements."""
+
+    number = 15
+    conclusion = ''
+
+    if number > 0:
+        if number % 2 == 0:
+            conclusion = 'Positive even number'
+        else:
+            conclusion = 'Positive odd number'
+    else:
+        conclusion = 'Zero or negative number'
+
+    assert conclusion == 'Positive odd number'
