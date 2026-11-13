@@ -359,3 +359,45 @@ def test_list_sorting():
     assert sorted(fruits) == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
 
     
+def test_list_sorting_and_slicing():
+    """List Sorting and Slicing
+
+    The list data type has a sort() method that modifies the list in-place, and a sorted() built-in
+    function that builds a new sorted list from an iterable.
+    """
+
+    fruits = [
+        'banana',
+        'kiwi',
+        'pear',
+        'apple',
+        'orange',
+        'grape',
+    ]
+
+    # Create a new sorted list
+    sorted_fruits = sorted(fruits, key=len)
+    assert sorted_fruits == [
+        'kiwi',
+        'pear',
+        'apple',
+        'grape',
+        'banana',
+        'orange',
+    ]
+
+    # Slice the first three shortest fruits
+    shortest_fruits = sorted_fruits[:3]
+    assert shortest_fruits == [
+        'kiwi',
+        'pear',
+        'apple',
+    ]
+
+    # Slice the last two longest fruits using a negative index.
+    longest_fruits = sorted_fruits[-2:]
+    assert longest_fruits == [
+        'banana',
+        'orange',
+    ]
+
