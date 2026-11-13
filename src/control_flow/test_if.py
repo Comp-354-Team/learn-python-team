@@ -26,3 +26,39 @@ def test_if_statement():
         conclusion = 'Number bigger than or equal to one'
 
     assert conclusion == 'Number bigger than or equal to one'
+
+def test_nested_if_statement():
+    """Test nested conditional statements."""
+
+    number = 15
+    conclusion = ''
+
+    if number > 0:
+        if number % 2 == 0:
+            conclusion = 'Positive even number'
+        else:
+            conclusion = 'Positive odd number'
+    else:
+        conclusion = 'Zero or negative number'
+
+    assert conclusion == 'Positive odd number'
+
+
+def test_multiple_elif_statement():
+    """Test multiple elif branches."""
+
+    score = 85
+    grade = ''
+
+    if score >= 90:
+        grade = 'A'
+    elif score >= 80:
+        grade = 'B'
+    elif score >= 70:
+        grade = 'C'
+    elif score >= 60:
+        grade = 'D'
+    else:
+        grade = 'F'
+
+    assert grade == 'B'
