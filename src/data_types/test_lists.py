@@ -155,6 +155,19 @@ def test_list_methods():
         'pear',
     ]
 
+    # Sort items of the list in place, but this time using the length of the item as the key.
+    fruits_copy.sort(key=len)
+    assert fruits_copy == [
+        'kiwi',
+        'pear',
+        'apple',
+        'apple',
+        'grape',
+        'banana',
+        'banana',
+        'orange',
+    ]
+
     # list.pop([i])
     # Remove the item at the given position in the list, and return it. If no index is specified,
     # a.pop() removes and returns the last item in the list. (The square brackets around the i in
@@ -336,3 +349,20 @@ def test_nested_list_comprehensions():
         (3, 7, 11),
         (4, 8, 12),
     ]
+
+def test_list_sorting():
+    """List Sorting
+
+    The list data type has a sort() method that modifies the list in-place, and a sorted() built-in
+    function that builds a new sorted list from an iterable.
+    """
+
+    # The sort() method sorts the items of a list in place (the arguments can be used for sort
+    # customization, see sorted() for their explanation).
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    fruits.sort()
+    assert fruits == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
+
+    # The sorted() built-in function returns a new sorted list from the items in iterable.
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    assert sorted(fruits) == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
