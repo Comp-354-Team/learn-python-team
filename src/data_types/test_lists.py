@@ -336,3 +336,68 @@ def test_nested_list_comprehensions():
         (3, 7, 11),
         (4, 8, 12),
     ]
+
+def test_list_sorting():
+    """List Sorting
+
+    The list data type has a sort() method that modifies the list in-place, and a sorted() built-in
+    function that builds a new sorted list from an iterable.
+    """
+
+    # The sort() method sorts the items of a list in place (the arguments can be used for sort
+    # customization, see sorted() for their explanation).
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    fruits.sort()
+    assert fruits == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
+
+    # Sort items of the list in place, but this time using the length of the item as the key.
+    fruits.sort(key=len)
+    assert fruits == ['kiwi','pear','apple','apple','banana','banana','orange']
+
+    # The sorted() built-in function returns a new sorted list from the items in iterable.
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    assert sorted(fruits) == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
+
+    
+def test_list_sorting_and_slicing():
+    """List Sorting and Slicing
+
+    The list data type has a sort() method that modifies the list in-place, and a sorted() built-in
+    function that builds a new sorted list from an iterable.
+    """
+
+    fruits = [
+        'banana',
+        'kiwi',
+        'pear',
+        'apple',
+        'orange',
+        'grape',
+    ]
+
+    # Create a new sorted list
+    sorted_fruits = sorted(fruits, key=len)
+    assert sorted_fruits == [
+        'kiwi',
+        'pear',
+        'apple',
+        'grape',
+        'banana',
+        'orange',
+    ]
+
+    # Slice the first three shortest fruits
+    shortest_fruits = sorted_fruits[:3]
+    assert shortest_fruits == [
+        'kiwi',
+        'pear',
+        'apple',
+    ]
+
+    # Slice the last two longest fruits using a negative index.
+    longest_fruits = sorted_fruits[-2:]
+    assert longest_fruits == [
+        'banana',
+        'orange',
+    ]
+
