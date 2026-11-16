@@ -17,15 +17,15 @@ def test_if_statement():
     conclusion = ''
 
     if number < 0:
-        conclusion = 'Number is less than zero'
+        conclusion = 'The value is negative'
     elif number == 0:
-        conclusion = 'Number equals to zero'
+        conclusion = 'The value is zero'
     elif number < 1:
-        conclusion = 'Number is greater than zero but less than one'
+        conclusion = 'The value is between zero and one'
     else:
-        conclusion = 'Number bigger than or equal to one'
+        conclusion = 'The value is at least one'
 
-    assert conclusion == 'Number bigger than or equal to one'
+    assert conclusion == 'The value is at least one'
 
 def test_nested_if_statement():
     """Test nested conditional statements."""
