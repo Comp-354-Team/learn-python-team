@@ -77,3 +77,63 @@ def test_dictionary():
     assert dictionary_for_string_keys['sape'] == 4139
     assert dictionary_for_string_keys['guido'] == 4127
     assert dictionary_for_string_keys['jack'] == 4098
+
+
+def test_dictionary_add():
+    fruits_dictionary = {
+        'cherry': 'red',
+        'apple': 'green',
+        'orange': 'orange',
+        'banana': 'yellow',
+    }
+    
+    # Add a single new key-value pair
+    fruits_dictionary['grape'] = 'purple'
+    assert 'grape' in fruits_dictionary
+    assert fruits_dictionary['grape'] == 'purple'
+    assert len(fruits_dictionary) == 5
+
+    # Add multiple items at once using update()
+    fruits_dictionary.update({'blueberry': 'blue', 'lemon': 'yellow'})
+    assert fruits_dictionary['blueberry'] == 'blue'
+    assert len(fruits_dictionary) == 7
+
+
+def test_dictionary_remove():
+    fruits_dictionary = {
+        'cherry': 'red',
+        'apple': 'green',
+        'orange': 'orange',
+        'banana': 'yellow',
+    }
+    
+    # Remove an item using del
+    del fruits_dictionary['apple']
+    assert 'apple' not in fruits_dictionary
+    assert len(fruits_dictionary) == 3
+
+    # Remove an item and capture its value using pop()
+    removed_color = fruits_dictionary.pop('banana')
+    assert removed_color == 'yellow'
+    assert 'banana' not in fruits_dictionary
+    assert len(fruits_dictionary) == 2
+
+
+def test_dictionary_modify():
+    fruits_dictionary = {
+        'cherry': 'red',
+        'apple': 'green',
+        'orange': 'orange',
+        'banana': 'yellow',
+    }
+    
+    # Modify an existing key's value directly
+    fruits_dictionary['apple'] = 'red'
+    assert fruits_dictionary['apple'] == 'red'
+    assert len(fruits_dictionary) == 4  # Ensure no new key was added
+
+    # Modify multiple existing values using update()
+    fruits_dictionary.update({'banana': 'brown', 'cherry': 'dark red'})
+    assert fruits_dictionary['banana'] == 'brown'
+    assert fruits_dictionary['cherry'] == 'dark red'
+    assert len(fruits_dictionary) == 4
