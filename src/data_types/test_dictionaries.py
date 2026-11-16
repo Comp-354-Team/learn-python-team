@@ -77,3 +77,23 @@ def test_dictionary():
     assert dictionary_for_string_keys['sape'] == 4139
     assert dictionary_for_string_keys['guido'] == 4127
     assert dictionary_for_string_keys['jack'] == 4098
+
+
+def test_dictionary_add():
+    fruits_dictionary = {
+        'cherry': 'red',
+        'apple': 'green',
+        'orange': 'orange',
+        'banana': 'yellow',
+    }
+    
+    # Add a single new key-value pair
+    fruits_dictionary['grape'] = 'purple'
+    assert 'grape' in fruits_dictionary
+    assert fruits_dictionary['grape'] == 'purple'
+    assert len(fruits_dictionary) == 5
+
+    # Add multiple items at once using update()
+    fruits_dictionary.update({'blueberry': 'blue', 'lemon': 'yellow'})
+    assert fruits_dictionary['blueberry'] == 'blue'
+    assert len(fruits_dictionary) == 7
