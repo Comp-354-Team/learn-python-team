@@ -97,3 +97,23 @@ def test_dictionary_add():
     fruits_dictionary.update({'blueberry': 'blue', 'lemon': 'yellow'})
     assert fruits_dictionary['blueberry'] == 'blue'
     assert len(fruits_dictionary) == 7
+
+
+def test_dictionary_remove():
+    fruits_dictionary = {
+        'cherry': 'red',
+        'apple': 'green',
+        'orange': 'orange',
+        'banana': 'yellow',
+    }
+    
+    # Remove an item using del
+    del fruits_dictionary['apple']
+    assert 'apple' not in fruits_dictionary
+    assert len(fruits_dictionary) == 3
+
+    # Remove an item and capture its value using pop()
+    removed_color = fruits_dictionary.pop('banana')
+    assert removed_color == 'yellow'
+    assert 'banana' not in fruits_dictionary
+    assert len(fruits_dictionary) == 2
