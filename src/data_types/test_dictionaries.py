@@ -117,3 +117,23 @@ def test_dictionary_remove():
     assert removed_color == 'yellow'
     assert 'banana' not in fruits_dictionary
     assert len(fruits_dictionary) == 2
+
+
+def test_dictionary_modify():
+    fruits_dictionary = {
+        'cherry': 'red',
+        'apple': 'green',
+        'orange': 'orange',
+        'banana': 'yellow',
+    }
+    
+    # Modify an existing key's value directly
+    fruits_dictionary['apple'] = 'red'
+    assert fruits_dictionary['apple'] == 'red'
+    assert len(fruits_dictionary) == 4  # Ensure no new key was added
+
+    # Modify multiple existing values using update()
+    fruits_dictionary.update({'banana': 'brown', 'cherry': 'dark red'})
+    assert fruits_dictionary['banana'] == 'brown'
+    assert fruits_dictionary['cherry'] == 'dark red'
+    assert len(fruits_dictionary) == 4
