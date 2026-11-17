@@ -117,11 +117,18 @@ def test_list_methods():
     # The optional arguments start and end are interpreted as in the slice notation and are used
     # to limit the search to a particular subsequence of the list. The returned index is computed
     # relative to the beginning of the full sequence rather than the start argument.
-    assert fruits.index('grape') == 0
-    assert fruits.index('orange') == 2
-    assert fruits.index('banana') == 4
-    assert fruits.index('mango') == 8
-    assert fruits.index('banana', 5) == 7  # Find next banana starting a position 5
+
+    fruits.insert(len(fruits),'strawberry')
+    fruits.insert(0,'strawberry')
+    assert fruits.index('strawberry') == 0 
+    assert fruits.index('grape') == 1
+    assert fruits.index('orange') == 3
+    assert fruits.index('banana') == 5
+    assert fruits.index('mango') == 9
+    assert fruits.index('banana', 6) == 8  # Find next banana starting a position 5
+    
+    fruits.remove('strawberry') # Remove first strawberry in the list
+    assert fruits.index('strawberry') == 9  # Find next strawberry starting a position 0
 
     with pytest.raises(Exception):
         fruits.index('not existing element')
@@ -135,12 +142,13 @@ def test_list_methods():
     # list.copy()
     # Return a shallow copy of the list. Equivalent to a[:].
     fruits_copy = fruits.copy()
-    assert fruits_copy == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
+    assert fruits_copy == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango', 'strawberry']
 
     # list.reverse()
     # Reverse the elements of the list in place.
     fruits_copy.reverse()
     assert fruits_copy == [
+        'strawberry',
         'mango',
         'banana',
         'apple',
@@ -169,6 +177,7 @@ def test_list_methods():
         'mango',
         'orange',
         'pear',
+        'strawberry',
     ]
 
     # list.pop([i])
@@ -176,12 +185,15 @@ def test_list_methods():
     # a.pop() removes and returns the last item in the list. (The square brackets around the i in
     # the method signature denote that the parameter is optional, not that you should type square
     # brackets at that position.)
+
+    assert fruits == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango', 'strawberry']
+    assert fruits.pop() == 'strawberry'
     assert fruits == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
-    assert fruits.pop() == 'mango'
-    assert fruits == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana']
     assert fruits.pop(0) == 'grape'
-    assert fruits == ['apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    assert fruits == ['apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
     assert fruits.pop(4) == 'kiwi'
+    assert fruits == ['apple', 'orange', 'pear', 'banana', 'apple', 'banana', 'mango']
+    assert fruits.pop() == 'mango'
     assert fruits == ['apple', 'orange', 'pear', 'banana', 'apple', 'banana']
 
     # list.clear()
@@ -355,4 +367,68 @@ def test_nested_list_comprehensions():
         (2, 6, 10),
         (3, 7, 11),
         (4, 8, 12),
+    ]
+
+def test_list_sorting():
+    """List Sorting
+
+    The list data type has a sort() method that modifies the list in-place, and a sorted() built-in
+    function that builds a new sorted list from an iterable.
+    """
+
+    # The sort() method sorts the items of a list in place (the arguments can be used for sort
+    # customization, see sorted() for their explanation).
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    fruits.sort()
+    assert fruits == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
+
+    # Sort items of the list in place, but this time using the length of the item as the key.
+    fruits.sort(key=len)
+    assert fruits == ['kiwi','pear','apple','apple','banana','banana','orange']
+
+    # The sorted() built-in function returns a new sorted list from the items in iterable.
+    fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    assert sorted(fruits) == ['apple', 'apple', 'banana', 'banana', 'kiwi', 'orange', 'pear']
+
+    
+def test_list_sorting_and_slicing():
+    """List Sorting and Slicing
+
+    The list data type has a sort() method that modifies the list in-place, and a sorted() built-in
+    function that builds a new sorted list from an iterable.
+    """
+
+    fruits = [
+        'banana',
+        'kiwi',
+        'pear',
+        'apple',
+        'orange',
+        'grape',
+    ]
+
+    # Create a new sorted list
+    sorted_fruits = sorted(fruits, key=len)
+    assert sorted_fruits == [
+        'kiwi',
+        'pear',
+        'apple',
+        'grape',
+        'banana',
+        'orange',
+    ]
+
+    # Slice the first three shortest fruits
+    shortest_fruits = sorted_fruits[:3]
+    assert shortest_fruits == [
+        'kiwi',
+        'pear',
+        'apple',
+    ]
+
+    # Slice the last two longest fruits using a negative index.
+    longest_fruits = sorted_fruits[-2:]
+    assert longest_fruits == [
+        'banana',
+        'orange',
     ]

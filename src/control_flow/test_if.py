@@ -15,14 +15,56 @@ def test_if_statement():
 
     number = 15
     conclusion = ''
+    description = ''
 
     if number < 0:
-        conclusion = 'Number is less than zero'
+        conclusion = 'Negative number'
+        description = 'The value is negative'
     elif number == 0:
-        conclusion = 'Number equals to zero'
+        conclusion = 'Zero'
+        description = 'The value is zero'
     elif number < 1:
-        conclusion = 'Number is greater than zero but less than one'
+        conclusion = 'Between zero and one'
+        description = 'The value is between zero and one'
     else:
-        conclusion = 'Number bigger than or equal to one'
+        conclusion = 'Positive number greater than or equal to one'
+        description = 'The value is at least one'
 
-    assert conclusion == 'Number bigger than or equal to one'
+    assert conclusion == 'Positive number greater than or equal to one'
+    assert description == 'The value is at least one'
+
+def test_nested_if_statement():
+    """Test nested conditional statements."""
+
+    number = 15
+    conclusion = ''
+
+    if number > 0:
+        if number % 2 == 0:
+            conclusion = 'Positive even number'
+        else:
+            conclusion = 'Positive odd number'
+    else:
+        conclusion = 'Zero or negative number'
+
+    assert conclusion == 'Positive odd number'
+
+
+def test_multiple_elif_statement():
+    """Test multiple elif branches."""
+
+    score = 85
+    grade = ''
+
+    if score >= 90:
+        grade = 'A'
+    elif score >= 80:
+        grade = 'B'
+    elif score >= 70:
+        grade = 'C'
+    elif score >= 60:
+        grade = 'D'
+    else:
+        grade = 'F'
+
+    assert grade == 'B'
