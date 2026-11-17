@@ -85,22 +85,31 @@ def test_list_methods():
     # Equivalent to a[len(a):] = [x].
     fruits.append('grape')
     assert fruits == ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'grape']
+    fruits.append('mango')
+    assert fruits == ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'grape', 'mango']
 
     # list.remove(x)
     # Remove the first item from the list whose value is equal to x.
     # It raises a ValueError if there is no such item.
     fruits.remove('grape')
-    assert fruits == ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    assert fruits == ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
 
     with pytest.raises(Exception):
         fruits.remove('not existing element')
+        
+    fruits.remove('apple')
+    assert fruits == ['orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
+    
 
     # list.insert(i, x)
     # Insert an item at a given position. The first argument is the index of the element
     # before which to insert, so a.insert(0, x) inserts at the front of the list,
     # and a.insert(len(a), x) is equivalent to a.append(x).
     fruits.insert(0, 'grape')
-    assert fruits == ['grape', 'orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+    assert fruits == ['grape', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
+    
+    fruits.insert(1, 'apple')
+    assert fruits == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
 
     # list.index(x[, start[, end]])
     # Return zero-based index in the list of the first item whose value is equal to x.
@@ -108,19 +117,22 @@ def test_list_methods():
     # The optional arguments start and end are interpreted as in the slice notation and are used
     # to limit the search to a particular subsequence of the list. The returned index is computed
     # relative to the beginning of the full sequence rather than the start argument.
+
     fruits.insert(len(fruits),'strawberry')
     fruits.insert(0,'strawberry')
     assert fruits.index('strawberry') == 0 
     assert fruits.index('grape') == 1
-    assert fruits.index('orange') == 2
+    assert fruits.index('orange') == 3
     assert fruits.index('banana') == 5
+    assert fruits.index('mango') == 9
     assert fruits.index('banana', 6) == 8  # Find next banana starting a position 5
     
     fruits.remove('strawberry') # Remove first strawberry in the list
-    assert fruits.index('strawberry') == 8  # Find next strawberry starting a position 0
+    assert fruits.index('strawberry') == 9  # Find next strawberry starting a position 0
 
     with pytest.raises(Exception):
         fruits.index('not existing element')
+       
 
     # list.count(x)
     # Return the number of times x appears in the list.
@@ -130,22 +142,26 @@ def test_list_methods():
     # list.copy()
     # Return a shallow copy of the list. Equivalent to a[:].
     fruits_copy = fruits.copy()
-    assert fruits_copy == ['grape', 'orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'strawberry']
+    assert fruits_copy == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango', 'strawberry']
 
     # list.reverse()
     # Reverse the elements of the list in place.
     fruits_copy.reverse()
     assert fruits_copy == [
         'strawberry',
+        'mango',
         'banana',
         'apple',
         'kiwi',
         'banana',
         'pear',
-        'apple',
         'orange',
+        'apple',
         'grape',
     ]
+    
+    fruits_copy.reverse()
+    assert fruits_copy == fruits
 
     # list.sort(key=None, reverse=False)
     # Sort the items of the list in place (the arguments can be used for sort customization,
@@ -158,6 +174,7 @@ def test_list_methods():
         'banana',
         'grape',
         'kiwi',
+        'mango',
         'orange',
         'pear',
         'strawberry',
@@ -168,10 +185,16 @@ def test_list_methods():
     # a.pop() removes and returns the last item in the list. (The square brackets around the i in
     # the method signature denote that the parameter is optional, not that you should type square
     # brackets at that position.)
-    assert fruits == ['grape', 'orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'strawberry']
+
+    assert fruits == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango', 'strawberry']
     assert fruits.pop() == 'strawberry'
-    assert fruits.pop() == 'banana'
-    assert fruits == ['grape', 'orange', 'apple', 'pear', 'banana', 'kiwi', 'apple']
+    assert fruits == ['grape', 'apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
+    assert fruits.pop(0) == 'grape'
+    assert fruits == ['apple', 'orange', 'pear', 'banana', 'kiwi', 'apple', 'banana', 'mango']
+    assert fruits.pop(4) == 'kiwi'
+    assert fruits == ['apple', 'orange', 'pear', 'banana', 'apple', 'banana', 'mango']
+    assert fruits.pop() == 'mango'
+    assert fruits == ['apple', 'orange', 'pear', 'banana', 'apple', 'banana']
 
     # list.clear()
     # Remove all items from the list. Equivalent to del a[:].
