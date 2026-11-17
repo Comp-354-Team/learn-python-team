@@ -401,3 +401,18 @@ def test_list_sorting_and_slicing():
         'orange',
     ]
 
+def test_add_list():
+    list1 = [1, 2, 3]
+    list2 = ['camping', 'tent', 'backpack']
+    
+    # Concatenate two lists using the + operator
+    list3 = list1 + list2
+    assert list3 == [1, 2, 3, 'camping', 'tent', 'backpack']
+
+    # Add an item to the end of the list using append()
+    list3.append('sleeping bag')
+    assert list3 == [1, 2, 3, 'camping', 'tent', 'backpack', 'sleeping bag']
+
+    # Insert an item at a given position
+    list3.insert(0, 'hiking boots')
+    assert list3 == ['hiking boots', 1, 2, 3, 'camping', 'tent', 'backpack', 'sleeping bag']
